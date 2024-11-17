@@ -8,7 +8,7 @@ permissions:
   contents: write
 
 jobs:
-  swift-format:
+  format-and-merge-files:
     runs-on: macos-latest
 
     steps:
