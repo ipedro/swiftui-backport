@@ -35,11 +35,11 @@ jobs:
         uses: actions/configure-pages@main
       - name: Build DocC
         run: |
-          xcodebuild docbuild -scheme swiftui-subviews-backport \
+          xcodebuild docbuild -scheme SubviewsBackport \
             -derivedDataPath /tmp/docbuild \
             -destination 'generic/platform=iOS';
           $(xcrun --find docc) process-archive \
-            transform-for-static-hosting /tmp/docbuild/Build/Products/Debug-iphoneos/swiftui-subviews-backport.doccarchive \
+            transform-for-static-hosting /tmp/docbuild/Build/Products/Debug-iphoneos/SubviewsBackport.doccarchive \
             --hosting-base-path swiftui-subviews-backport \
             --output-path docs;
           echo "<script>window.location.href += \"/documentation/swiftui-subviews-backport\"</script>" > docs/index.html;

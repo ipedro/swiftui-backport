@@ -5,7 +5,7 @@ import PackageDescription
 
 let isDevelopment = !Context.packageDirectory.contains("/checkouts/")
 
-let package = Package(
+var package = Package(
     name: "swiftui-subviews-backport",
     platforms: [
         .iOS(.v13),
@@ -17,7 +17,7 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "swiftui-subviews-backport",
+            name: "SubviewsBackport",
             targets: ["SubviewsBackport"]
         ),
     ],
@@ -29,5 +29,19 @@ let package = Package(
             path: isDevelopment ? "Development" : ".",
             sources: isDevelopment ? nil : ["SubviewsBackport.swift"]
         ),
+        .target(
+            name: "SubviewsBackport_Examples",
+            path: ".",
+            sources: ["Examples.swift"]
+        ),
     ]
 )
+
+if isDevelopment {
+    package.products.append(
+        .library(
+            name: "SubviewsBackport_Examples",
+            targets: ["SubviewsBackport_Examples"]
+        )
+    )
+}
