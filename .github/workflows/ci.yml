@@ -1,4 +1,4 @@
-name: Concatenate Files on Merge
+name: CI
 
 on:
   push:
@@ -8,15 +8,39 @@ permissions:
   contents: write
 
 jobs:
+  swift-format:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run SwiftFormat
+      run: swiftformat .
+
+    - name: Check for changes
+      id: check_changes
+      run: |
+        if [ -n "$(git status --porcelain)" ]; then
+          echo "has_changes=true" >> $GITHUB_ENV
+        else
+          echo "has_changes=false" >> $GITHUB_ENV
+        fi
+
+    - name: Commit changes
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add .
+        git commit -m "Apply SwiftFormat" || echo "No changes to commit"
+        git push origin HEAD:main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   merge-sources:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
 
     - name: Clean and create output directory
       run: |
@@ -64,6 +88,7 @@ jobs:
           echo "has_changes=true" >> $GITHUB_ENV
         else
           echo "has_changes=false" >> $GITHUB_ENV
+        fi
           
     - name: Commit changes
       if: ${{ steps.check_changes.outputs.has_changes == 'true' }}
