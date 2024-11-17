@@ -56,8 +56,17 @@ jobs:
       run: |
         # Concatenate LICENSE content with two newlines, imports, and the rest of the file
         cat license_commented.txt newlines.txt code_with_sorted_imports.txt > SubviewsBackport.swift
-      
+    
+    - name: Check for changes
+      id: check_changes
+      run: |
+        if [ -n "$(git status --porcelain)" ]; then
+          echo "has_changes=true" >> $GITHUB_ENV
+        else
+          echo "has_changes=false" >> $GITHUB_ENV
+          
     - name: Commit changes
+      if: ${{ steps.check_changes.outputs.has_changes == 'true' }}
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
