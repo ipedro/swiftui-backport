@@ -1,6 +1,6 @@
-import protocol SwiftUI.View
 import enum SwiftUI._VariadicView
 import struct SwiftUI.ForEach
+import protocol SwiftUI.View
 import struct SwiftUI.ViewBuilder
 
 /// A view that creates a tree of subviews from an input view.
@@ -15,7 +15,7 @@ import struct SwiftUI.ViewBuilder
 ///
 public struct MultiViewTree<Input, Output>: View where Input: View, Output: View {
     private var _tree: _VariadicView.Tree<Root, Input>
-    
+
     /// Creates a tree of subviews from a given view.
     ///
     /// This initializer allows you to define a hierarchical structure based on
@@ -57,7 +57,7 @@ public struct MultiViewTree<Input, Output>: View where Input: View, Output: View
             content: { input }
         )
     }
-    
+
     public init<Row: View>(
         subviews input: Input,
         @ViewBuilder row: @escaping (_ subview: _Subview) -> Row
@@ -67,14 +67,14 @@ public struct MultiViewTree<Input, Output>: View where Input: View, Output: View
             content: { input }
         )
     }
-    
+
     public var body: some View {
         _tree
     }
-    
+
     public struct Root: _VariadicView.MultiViewRoot {
         var body: (_Subviews) -> Output
-        
+
         public func body(children: _VariadicView.Children) -> Output {
             body(_Subviews(children: children))
         }

@@ -1,5 +1,5 @@
-import protocol SwiftUI.View
 import enum SwiftUI._VariadicView
+import protocol SwiftUI.View
 
 /// A collection of subview proxies.
 ///
@@ -20,14 +20,14 @@ import enum SwiftUI._VariadicView
 ///   - `RandomAccessCollection`: Enables efficient indexed access and iteration.
 public struct _Subviews: View, RandomAccessCollection {
     public typealias Element = _Subview
-    
+
     public struct Iterator: IteratorProtocol {
         private var base: IndexingIterator<_VariadicView.Children>
-        
+
         init(children: _VariadicView.Children) {
             self.base = children.makeIterator()
         }
-        
+
         public mutating func next() -> _Subview? {
             guard let nextElement = base.next() else {
                 return nil
@@ -35,13 +35,13 @@ public struct _Subviews: View, RandomAccessCollection {
             return _Subview(_element: nextElement)
         }
     }
-    
+
     var children: _VariadicView.Children
-    
+
     public var body: some View {
         children
     }
-    
+
     public func makeIterator() -> Iterator {
         Iterator(children: children)
     }
@@ -62,4 +62,3 @@ public struct _Subviews: View, RandomAccessCollection {
         children.index(after: index)
     }
 }
-

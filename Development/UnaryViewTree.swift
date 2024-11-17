@@ -1,6 +1,6 @@
-import protocol SwiftUI.View
 import enum SwiftUI._VariadicView
 import struct SwiftUI.ForEach
+import protocol SwiftUI.View
 import struct SwiftUI.ViewBuilder
 
 /// A view that applies a unary transformation to subviews of a given view.
@@ -14,7 +14,7 @@ import struct SwiftUI.ViewBuilder
 ///   - Output: The type of the resulting view after transformation.
 public struct UnaryViewTree<Input, Output>: View where Input: View, Output: View {
     private var _tree: _VariadicView.Tree<Root, Input>
-    
+
     public init(
         subviews input: Input,
         @ViewBuilder transform: @escaping (_ subviews: _Subviews) -> Output
@@ -23,7 +23,7 @@ public struct UnaryViewTree<Input, Output>: View where Input: View, Output: View
             input
         }
     }
-    
+
     public init<V: View>(
         subviews input: Input,
         @ViewBuilder row: @escaping (_ subview: _Subview) -> V
@@ -34,14 +34,14 @@ public struct UnaryViewTree<Input, Output>: View where Input: View, Output: View
             input
         }
     }
-    
+
     public var body: some View {
         _tree
     }
-    
+
     public struct Root: _VariadicView.UnaryViewRoot {
         var body: (_Subviews) -> Output
-        
+
         public func body(children: _VariadicView.Children) -> Output {
             body(_Subviews(children: children))
         }

@@ -1,7 +1,7 @@
-import protocol SwiftUI.View
 import protocol Swift.Identifiable
 import enum SwiftUI._VariadicView
 import struct SwiftUI.ForEach
+import protocol SwiftUI.View
 
 /// A proxy representation of a subview.
 ///
@@ -22,38 +22,38 @@ public struct _Subview: View, Identifiable {
     public static func == (lhs: _Subview, rhs: _Subview) -> Bool {
         lhs._element.id == rhs._element.id
     }
-    
+
     var _element: _VariadicView.Children.Element
-    
+
     public var id: AnyHashable {
         _element.id
     }
-    
+
     public var body: some View {
         _element
     }
-    
+
     public func id<ID: Hashable>(as _: ID.Type = ID.self) -> ID? {
         _element.id(as: ID.self)
     }
 }
 
 #if hasAttribute(retroactive)
-extension Slice: @retroactive View where Element == _Subview, Index: SignedInteger, Base.Index.Stride: SignedInteger {
-    public var body: some View {
-        let subviews = (startIndex..<endIndex).map { index in
-            return base[index]
+    extension Slice: @retroactive View where Element == _Subview, Index: SignedInteger, Base.Index.Stride: SignedInteger {
+        public var body: some View {
+            let subviews = (startIndex ..< endIndex).map { index in
+                base[index]
+            }
+            return ForEach(subviews) { $0 }
         }
-        return ForEach(subviews) { $0 }
     }
-}
 #else
-extension Slice: View where Element == _Subview, Index: SignedInteger, Base.Index.Stride: SignedInteger {
-    public var body: some View {
-        let subviews = (startIndex..<endIndex).map { index in
-            return base[index]
+    extension Slice: View where Element == _Subview, Index: SignedInteger, Base.Index.Stride: SignedInteger {
+        public var body: some View {
+            let subviews = (startIndex ..< endIndex).map { index in
+                base[index]
+            }
+            return ForEach(subviews) { $0 }
         }
-        return ForEach(subviews) { $0 }
     }
-}
 #endif

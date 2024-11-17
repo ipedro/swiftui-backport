@@ -1,6 +1,6 @@
+import struct SwiftUI.Group
 import protocol SwiftUI.View
 import struct SwiftUI.ViewBuilder
-import struct SwiftUI.Group
 
 @available(iOS, introduced: 13.0, deprecated: 18.0, message: "Please use the built in Group(subviews: ...) init")
 @available(macOS, introduced: 10.15, deprecated: 15.0, message: "Please use the built in Group(subviews: ...) init")
@@ -8,7 +8,6 @@ import struct SwiftUI.Group
 @available(watchOS, introduced: 6.0, deprecated: 11.0, message: "Please use the built in Group(subviews: ...) init")
 @available(visionOS, introduced: 1.0, deprecated: 2.0, message: "Please use the built in Group(subviews: ...) init")
 extension Group where Content: View {
-    
     /// Constructs a group from the subviews of the given view.
     ///
     /// Use this initializer to create a group that gives you programmatic
