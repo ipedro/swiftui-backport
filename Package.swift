@@ -3,6 +3,8 @@
 
 import PackageDescription
 
+let isDevelopment = !Context.packageDirectory.contains("/checkouts/")
+
 let package = Package(
     name: "swiftui-subviews-backport",
     platforms: [
@@ -16,13 +18,15 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "swiftui-subviews-backport",
-            targets: ["swiftui-subviews-backport"]),
+            targets: ["SubviewsBackport"]),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "swiftui-subviews-backport"),
-        
+            name: "SubviewsBackport",
+            path: isDevelopment ? "Development" : ".",
+            sources: isDevelopment ? nil : ["SubviewsBackport.swift"]
+        ),
     ]
 )

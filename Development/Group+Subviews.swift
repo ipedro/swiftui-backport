@@ -98,10 +98,10 @@ extension Group where Content: View {
     /// - SeeAlso: Check also ``SwiftUICore/ForEach/init(subviews:content:)``
     ///
     @_alwaysEmitIntoClient
-    public init<V>: View, Result: View>(
+    public init<V, Result>(
         subviews view: V,
         @ViewBuilder transform: @escaping (_Subviews) -> Result
-    ) where Content == MultiViewTree<V, Result> {
+    ) where Content == MultiViewTree<V, Result>, V: View, Result: View {
         self.init {
             MultiViewTree(subviews: view, transform: transform)
         }
