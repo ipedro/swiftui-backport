@@ -16,25 +16,6 @@ jobs:
     - name: Run SwiftFormat
       run: swiftformat .
 
-    - name: Check for changes
-      id: check_changes
-      run: |
-        if [ -n "$(git status --porcelain)" ]; then
-          echo "has_changes=true" >> $GITHUB_ENV
-        else
-          echo "has_changes=false" >> $GITHUB_ENV
-        fi
-
-    - name: Commit changes
-      run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add .
-        git commit -m "Apply SwiftFormat" || echo "No changes to commit"
-        git push origin HEAD:main
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     - name: Clean and create output directory
       run: |
         rm -rf output
