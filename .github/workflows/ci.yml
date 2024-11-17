@@ -59,9 +59,9 @@ jobs:
       id: check_changes
       run: |
         if [ -n "$(git status --porcelain)" ]; then
-          echo "has_changes=true" >> $GITHUB_ENV
+          echo "::set-output name=has_changes::true"
         else
-          echo "has_changes=false" >> $GITHUB_ENV
+          echo "::set-output name=has_changes::false"
         fi
           
     - name: Commit changes
