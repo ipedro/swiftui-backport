@@ -32,7 +32,7 @@ public struct _Subviews: View, RandomAccessCollection {
             guard let nextElement = base.next() else {
                 return nil
             }
-            return _Subview(_element: nextElement)
+            return _Subview(element: nextElement)
         }
     }
 
@@ -55,7 +55,7 @@ public struct _Subviews: View, RandomAccessCollection {
     }
 
     public subscript(position: Int) -> _Subview {
-        _Subview(_element: children[position])
+        _Subview(element: children[position])
     }
 
     public func index(after index: Int) -> Int {

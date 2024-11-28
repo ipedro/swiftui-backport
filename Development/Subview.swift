@@ -13,28 +13,28 @@ import protocol SwiftUI.View
 ///
 /// - Properties:
 ///   - `id`: A unique identifier for the subview.
-///   - `_element`: The underlying variadic view child.
+///   - `element`: The underlying variadic view child.
 ///
 /// - Conformance:
 ///   - `View`: `_Subview` is a SwiftUI view that can be embedded in a view hierarchy.
 ///   - `Identifiable`: Allows `_Subview` to be uniquely identified when used in collections.
 public struct _Subview: View, Identifiable {
     public static func == (lhs: _Subview, rhs: _Subview) -> Bool {
-        lhs._element.id == rhs._element.id
+        lhs.element.id == rhs.element.id
     }
 
-    var _element: _VariadicView.Children.Element
+    var element: _VariadicView.Children.Element
 
     public var id: AnyHashable {
-        _element.id
+        element.id
     }
 
     public var body: some View {
-        _element
+        element
     }
 
     public func id<ID: Hashable>(as _: ID.Type = ID.self) -> ID? {
-        _element.id(as: ID.self)
+        element.id(as: ID.self)
     }
 }
 
