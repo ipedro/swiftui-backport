@@ -1,15 +1,15 @@
-# Subviews Backport for SwiftUI
+# Backport for SwiftUI
 
 [![Swift Package Manager](https://img.shields.io/badge/SPM-compatible-brightgreen.svg)](https://swift.org/package-manager/)
 [![Platforms](https://img.shields.io/badge/platforms-iOS%2013%2B%20%7C%20macOS%2010.15%2B%20%7C%20tvOS%2013%2B%20%7C%20watchOS%206%2B%20%7C%20visionOS%201%2B-blue.svg)](https://developer.apple.com/swift/)
 [![Swift Version](https://img.shields.io/badge/Swift-5.9%2B-orange.svg)](https://swift.org/download/)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](LICENSE)
-[![Build Status](https://github.com/ipedro/swiftui-subviews-backport/actions/workflows/ci.yml/badge.svg)](https://github.com/ipedro/swiftui-subviews-backport/actions)
-[![GitHub Stars](https://img.shields.io/github/stars/ipedro/swiftui-subviews-backport.svg)](https://github.com/ipedro/swiftui-subviews-backport/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/ipedro/swiftui-subviews-backport.svg)](https://github.com/ipedro/swiftui-subviews-backport/issues)
+[![Build Status](https://github.com/ipedro/swiftui-backport/actions/workflows/ci.yml/badge.svg)](https://github.com/ipedro/swiftui-backport/actions)
+[![GitHub Stars](https://img.shields.io/github/stars/ipedro/swiftui-backport.svg)](https://github.com/ipedro/swiftui-backport/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/ipedro/swiftui-backport.svg)](https://github.com/ipedro/swiftui-backport/issues)
 [![Twitter](https://img.shields.io/twitter/follow/ipedroalmeida.svg?style=social&label=Follow)](https://twitter.com/ipedroalmeida)
 
-A lightweight Swift package that backports SwiftUI’s ForEach and Group initializers for accessing subviews to iOS versions earlier than 18. This allows developers to use the new subview-based APIs introduced in iOS 18 while maintaining compatibility with older iOS versions.
+A lightweight Swift package that backports SwiftUI APIs to iOS versions earlier than latest (18). This allows developers to use newer APIs while maintaining compatibility with older iOS versions.
 
 ## Features
 
@@ -26,7 +26,7 @@ A lightweight Swift package that backports SwiftUI’s ForEach and Group initial
 You can add the package to your project using Swift Package Manager. In Xcode:
 
 1. Go to File > Add Packages…
-2. Enter the repository URL: https://github.com/ipedro/swiftui-subviews-backport.git
+2. Enter the repository URL: https://github.com/ipedro/swiftui-backport.git
 3. Choose the package and add it to your project.
 
 #### Package.swift
@@ -37,18 +37,18 @@ If you’re developing a Swift package and want to add Subviews Backport as a de
 
     ```swift
     dependencies: [
-        .package(url: "https://github.com/ipedro/swiftui-subviews-backport.git", from: "1.0.0")
+        .package(url: "https://github.com/ipedro/swiftui-backport.git", from: "1.0.0")
     ]
     ```
 
-2) Add SubviewsBackport to your target’s dependencies:
+2) Add SwiftUIBackport to your target’s dependencies:
 
     ```swift
     targets: [
         .target(
             name: "YourPackage",
             dependencies: [
-                .product(name: "SubviewsBackport", package: "swiftui-subviews-backport")
+                .product(name: "SwiftUIBackport", package: "swiftui-backport")
             ]
         ),
         // Other targets...
@@ -60,7 +60,7 @@ If you’re developing a Swift package and want to add Subviews Backport as a de
 Import the package in your Swift file:
 
 ```swift
-import SubviewsBackport
+import SwiftUIBackport
 ```
 
 ### Backported ForEach Initializer
@@ -137,7 +137,7 @@ struct CardsView: View {
 
 ```swift
 import SwiftUI
-import SubviewsBackport
+import SwiftUIBackport
 
 struct CustomListView: View {
     var body: some View {
@@ -170,7 +170,7 @@ struct CustomListView: View {
 
 ```swift
 import SwiftUI
-import SubviewsBackport
+import SwiftUIBackport
 
 struct CustomStack<Content: View>: View {
     let content: Content
@@ -217,7 +217,7 @@ struct CustomStackView: View {
 
 ```swift
 import SwiftUI
-import SubviewsBackport
+import SwiftUIBackport
 
 struct AdaptiveStack<Content: View>: View {
     let content: Content
@@ -306,7 +306,7 @@ struct AdaptiveStackDemo: View {
 
 ```swift
 import SwiftUI
-import SubviewsBackport
+import SwiftUIBackport
 
 struct ConditionalTransformationView: View {
     var body: some View {
@@ -337,7 +337,7 @@ struct ConditionalTransformationView: View {
 
 ```swift
 import SwiftUI
-import SubviewsBackport
+import SwiftUIBackport
 
 struct CustomizedSubviewsExample: View {
     var body: some View {

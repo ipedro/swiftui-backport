@@ -1,6 +1,6 @@
 #if DEBUG
     import SwiftUI
-    import SubviewsBackport
+    import SwiftUIBackport
 
     // MARK: - Previews
 
